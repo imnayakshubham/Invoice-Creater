@@ -1,0 +1,29 @@
+.welcomepage {
+  height: 92.5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(33, 33, 33);
+  background: linear-gradient(
+    90deg,
+    rgba(33, 33, 33, 0.49653364763874297) 0%,
+    rgba(255, 255, 255, 1) 50%
+  );
+}
+.welcomepage__left {
+  width: 50vw;
+  margin: 1rem;
+}
+.welcomepage__right {
+  width: 25vw;
+  margin: 1rem;
+}
+.greet {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+.signinmessage,
+.message {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}

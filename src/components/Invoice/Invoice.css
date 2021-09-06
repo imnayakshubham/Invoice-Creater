@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+* {
+  font-family: "Lato", sans-serif;
+  /* margin-left: 0.5rem;
+  margin-right: 0.5rem; */
+
+  color: #707070;
+}
+.invoicedesigncontainer {
+  margin: 1rem;
+}
+#formcontainer {
+  margin-top: 1rem;
+}
+.info {
+  display: flex;
+  justify-content: center;
+}
+.userdetail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.del {
+  margin-right: 5px;
+  cursor: pointer;
+}
+.companynamecontainer {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+.userinvoices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.inputcomponent {
+  margin-left: 14.2px;
+  border: none;
+}
+.listbtn,
+.btns {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.companyname {
+  font-family: "Lato", sans-serif;
+  color: #212121;
+  font-size: 3rem;
+  font-weight: 800;
+}
+.userinfo {
+  display: flex;
+  height: 100%;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
+  text-align: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.purpose {
+  border-right: 2px solid grey;
+  padding: 0.2rem;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: rgb(0, 102, 255);
+}
+
+/* input,
+textarea {
+  padding: 1rem;
+  border-radius: 4px;
+  width: 25rem;
+  height: 4rem;
+  margin: 1rem;
+} */
+
+.invoiceheading,
+.invoicecol {
+  left: 0;
+  padding: 0%;
+  margin: 0%;
+}
+
+table {
+  color: #212121;
+
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:first-child() {
+  background-color: #b4b4b4;
+}
+
+.result {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.4rem;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+}
+.amount,
+.taxes {
+  display: block;
+  margin: 0.2rem;
+}
+
+.tccontainer {
+  width: 50%;
+}
+
+.tccontainer > h2 {
+  border-bottom: 1px solid #b4b4b4;
+}
+
+.btn {
+  height: 50px;
+  width: 100px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: rgb(65, 141, 255);
+  color: #fff;
+}
+
+.pricecontainer > h1 {
+  float: right;
+  font-weight: bolder;
+  font-size: 5rem;
+}
+
+.pricecontainer > h2 {
+  margin-left: 50%;
+  float: right;
+}
+.greet {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  color: rgb(0, 102, 255);
+}
+
+.ownerinfo {
+  display: flex;
+  height: 100%;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
+  text-align: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.ownername,
+.owneraddress,
+.ownerotherinfo {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  color: rgb(0, 102, 255);
+}
+
+.owneraddress,
+.ownerotherinfo {
+  width: 25%;
+}

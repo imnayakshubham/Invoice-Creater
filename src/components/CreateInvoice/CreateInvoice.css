@@ -1,0 +1,20 @@
+.formcontainer {
+  display: flex;
+}
+.clientinfo {
+  display: flex;
+  /* justify-content: center; */
+}
+.clientinfo > input,
+.productinfo > input,
+.duedate {
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 12.5rem;
+  height: 2rem;
+  margin: 0.75rem;
+}
+.create {
+  display: flex;
+  justify-content: flex-end;
+}
