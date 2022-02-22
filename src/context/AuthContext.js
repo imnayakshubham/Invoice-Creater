@@ -6,20 +6,7 @@ export const AuthContext = createContext();
 
 export const useAuth = () => {
   useContext(AuthContext);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 
 export const AuthProvider = ({ children }) => {
   const [loading, setloading] = useState(true);
