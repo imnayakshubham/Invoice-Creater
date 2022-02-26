@@ -36,17 +36,23 @@ function Welcome() {
             money.
           </p>
           <div style={{ marginTop: "50px" }} className={"mainLoginBtn"}>
-            <Button className="loginBtn" onClick={handleLogin}>
-              <p
-                style={{
-                  color: "white",
-                  fontSize: "25px",
-                  padding: "0px 20px",
-                }}
-              >
-                Log In
-              </p>
-            </Button>
+            {user ? (
+              <Link to={"/create"}>
+                <p>Create A Invoice</p>
+              </Link>
+            ) : (
+              <Button className="loginBtn" onClick={handleLogin}>
+                <p
+                  style={{
+                    color: "white",
+                    fontSize: "25px",
+                    padding: "0px 20px",
+                  }}
+                >
+                  Log In
+                </p>
+              </Button>
+            )}
           </div>
         </div>
       </div>

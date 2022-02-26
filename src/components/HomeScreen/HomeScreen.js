@@ -8,6 +8,7 @@ import Profile from "../Profile/Profile";
 import ViewInvoice from "../ViewInvoice/ViewInvoice";
 import Welcome from "../Welcome/Welcome";
 // import Profile from '../Profile/Profile'
+import CreateInvoice from "./../CreateInvoice/CreateInvoice";
 
 function HomeScreen() {
   return (
@@ -20,6 +21,7 @@ function HomeScreen() {
           <PrivateRoute exact path="/invoices" component={ViewInvoice} />
           <PrivateRoute exact path="/invoice/:id" component={Invoice} />
           <PrivateRoute exact path="/profile" component={Profile} />
+          <PrivateRoute exact path="/create" component={CreateInvoice} />
         </Switch>
       </AuthProvider>
     </Router>
