@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
+import Avatar from "@mui/material/Avatar";
+import { handleLogin } from "../Welcome/Welcome";
 
 function Header() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -56,7 +58,7 @@ function Header() {
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             >
-              Dashboard
+              <Avatar alt="Remy Sharp" src="" />
             </Button>
             <Menu
               id="fade-menu"
@@ -72,7 +74,7 @@ function Header() {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  padding: 10,
+                  padding: "5px 20px",
                 }}
               >
                 <MenuItem onClick={handleProfile}>Profile</MenuItem>
@@ -82,7 +84,7 @@ function Header() {
             </Menu>
           </div>
         ) : (
-          <div>
+          <div onClick={handleLogin}>
             <Button className="loginBtn">
               <p style={{ color: "white" }}>Log In</p>
             </Button>

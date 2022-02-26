@@ -11,14 +11,14 @@ import { Link } from "react-router-dom";
 import { auth } from "../../firebaseconfig/firebase";
 import firebase from "firebase";
 
+const provider = new firebase.auth.GoogleAuthProvider();
+export const handleLogin = () => {
+  auth.signInWithPopup(provider);
+};
+
 function Welcome() {
-  const provider = new firebase.auth.GoogleAuthProvider();
   const { user } = useContext(AuthContext);
   const history = useHistory();
-
-  const handleLogin = () => {
-    auth.signInWithPopup(provider);
-  };
 
   return (
     <Container fixed disableGutters style={{ marginTop: "100px" }}>
