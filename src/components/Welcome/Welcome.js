@@ -21,7 +21,7 @@ function Welcome() {
   };
 
   return (
-    <Container fixed disableGutters>
+    <Container fixed disableGutters style={{ marginTop: "100px" }}>
       <div className="welcomepage">
         <div className="mainImage">
           <img src={image} style={{ height: "400px", width: "400px" }} />

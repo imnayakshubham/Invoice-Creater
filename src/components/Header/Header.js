@@ -40,7 +40,7 @@ function Header() {
   };
 
   return (
-    <div>
+    <div className="header">
       <div>
         <Link to="/">
           <h1 className="logoText">Invoicer</h1>

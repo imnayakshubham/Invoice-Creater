@@ -3,11 +3,7 @@ import HomeScreen from "./components/HomeScreen/HomeScreen";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  return (
-    <div className="App">
-      <HomeScreen />
-    </div>
-  );
+  return <HomeScreen />;
 }
 
 export default App;

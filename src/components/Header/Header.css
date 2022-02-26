@@ -1,26 +1,9 @@
 .header {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  text-align: center;
-  padding: 0.5rem 1rem 0.5rem 1rem;
   align-items: center;
-  background: rgb(255, 255, 255);
-  background: -moz-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(33, 33, 33, 0.5049370089832808) 100%
-  );
-  background: -webkit-linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(33, 33, 33, 0.5049370089832808) 100%
-  );
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(33, 33, 33, 0.5049370089832808) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#212121",GradientType=1);
+  padding: 0 150px;
 }
 
 .loginBtn {
@@ -37,4 +20,10 @@
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 800px) {
+  .header {
+    padding: 0 10px;
+  }
 }

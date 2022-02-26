@@ -14,6 +14,7 @@ function HomeScreen() {
     <Router>
       <AuthProvider>
         <Header />
+        <hr />
         <Switch>
           <Route exact path="/" component={Welcome} />
           <PrivateRoute exact path="/invoices" component={ViewInvoice} />
