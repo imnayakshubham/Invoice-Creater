@@ -65,7 +65,6 @@ function ViewInvoice() {
   useEffect(() => {
     getinvoices();
   }, []);
-  console.log(invoices);
   const classes = useStyles();
   const [isopen, setisopen] = useState(false);
   const handleclose = () => {

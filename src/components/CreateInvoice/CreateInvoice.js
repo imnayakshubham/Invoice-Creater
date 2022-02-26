@@ -26,7 +26,6 @@ function CreateInvoice() {
       ...inputFields,
       { id: uuidv4(), productname: "", amount: 0, quantity: 0 },
     ]);
-    console.log("handleAddFields------->", inputFields);
   };
 
   const handleChangeInput = (id, event) => {
@@ -68,7 +67,6 @@ function CreateInvoice() {
       !status ||
       !userInfo
     ) {
-      console.log("error pls fill all");
     }
     try {
       await db.collection("invoices").add({
@@ -91,7 +89,6 @@ function CreateInvoice() {
         { id: uuidv4(), productname: "", amount: 0, quantity: 0 },
       ]);
     } catch (error) {
-      console.log(error);
       setError(error);
     }
   };

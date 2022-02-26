@@ -6,53 +6,88 @@ import firebase from "firebase";
 import { Link, useHistory } from "react-router-dom";
 import { auth } from "../../firebaseconfig/firebase";
 import { AuthContext } from "../../context/AuthContext";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
 
 function Header() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  const currentUser = useContext(AuthContext).user;
-  const [loggedout, setloggedout] = useState(false);
+  const { user } = useContext(AuthContext);
   const history = useHistory();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    auth.signOut();
+    localStorage.removeItem("userInfo");
+    history.push("/");
+  };
+
+  const handleProfile = () => {
+    history.push("/profile");
+  };
+
+  const handleInvoices = () => {
+    history.push("/invoices");
+  };
 
   return (
     <div>
-      <div className="header">
-        <div className="headerleft">
-          {currentUser ? (
-            <Link to="/invoices">
-              <h1>Invoice Creater</h1>
-            </Link>
-          ) : (
-            <Link to="/">
-              <h1>Invoice Creater</h1>
-            </Link>
-          )}
-        </div>
-        <div className="headerright">
-          {/* <MenuIcon> */}
-          {currentUser ? (
-            <div>
-              <button
-                style={{ backgroundColor: "red", borderRadius: "15px" }}
-                onClick={() => {
-                  auth.signOut();
-                  setloggedout(true);
-                  localStorage.removeItem("invoiceappuserinfo");
-                  history.push("/");
+      <div>
+        <Link to="/">
+          <h1 className="logoText">Invoicer</h1>
+        </Link>
+      </div>
+      <div>
+        {user ? (
+          <div>
+            <Button
+              id="fade-button"
+              aria-controls={open ? "fade-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={handleClick}
+            >
+              Dashboard
+            </Button>
+            <Menu
+              id="fade-menu"
+              MenuListProps={{
+                "aria-labelledby": "fade-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              TransitionComponent={Fade}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: 10,
                 }}
               >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => {
-                auth.signInWithPopup(provider);
-              }}
-            >
-              SIGN IN WITH GOOGLE
-            </button>
-          )}
-        </div>
+                <MenuItem onClick={handleProfile}>Profile</MenuItem>
+                <MenuItem onClick={handleInvoices}>Invoices</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </div>
+            </Menu>
+          </div>
+        ) : (
+          <div>
+            <Button className="loginBtn">
+              <p style={{ color: "white" }}>Log In</p>
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

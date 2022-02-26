@@ -22,52 +22,19 @@
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#212121",GradientType=1);
 }
-button {
-  background: none;
-  cursor: pointer;
-  border: none;
-  text-align: center;
-  padding: 0.5rem;
-  /* ma */
-}
-button:hover {
-  background-color: #0075ff;
-  color: #fff;
-  border-radius: 0.8rem;
+
+.loginBtn {
+  background-color: #045de9;
+  background-image: linear-gradient(315deg, #4776e6, #8e54e9 74%);
+  color: white;
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
-/* @media screen and (max-width: 500px) {
-  nav {
-    border-bottom: 1px solid #455468;
-  }
+.logoText {
+  font-size: 40px;
+  background: -webkit-linear-gradient(#a5ccb2, #0b82a3);
 
-  .headerright {
-    position: absolute;
-    width: 100%;
-    height: calc(100vh - 71px);
-    background-color: #18283b;
-    left: 0;
-    top: 0;
-    text-align: center;
-    display: none;
-    margin-top: 71px;
-  }
-
-  .headerright li {
-    display: block;
-    padding: 10px 15px;
-  }
-
-  .headerright li a {
-    display: block;
-    padding: 10px 0;
-  }
-
-  #icon {
-    display: block;
-  }
-
-  #checkbox:checked ~ ul {
-    display: block;
-  }
-} */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

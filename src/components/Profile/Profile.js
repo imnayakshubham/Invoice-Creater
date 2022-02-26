@@ -1,7 +1,5 @@
 import React from "react";
 
-function Profile() {
+export default function Profile({ history }) {
   return <div>Profile</div>;
 }
-
-export default Profile;

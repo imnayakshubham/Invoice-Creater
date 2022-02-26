@@ -6,44 +6,51 @@ import rest from "../../assests/GroovySittingDoodle.svg";
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router";
 import { Button } from "@material-ui/core";
+import { Container } from "@mui/material";
+import { Link } from "react-router-dom";
+import { auth } from "../../firebaseconfig/firebase";
+import firebase from "firebase";
 
 function Welcome() {
+  const provider = new firebase.auth.GoogleAuthProvider();
   const { user } = useContext(AuthContext);
   const history = useHistory();
+
+  const handleLogin = () => {
+    auth.signInWithPopup(provider);
+  };
+
   return (
-    <div className="welcomepage">
-      <div className="welcomepage__left">
-        <div>
-          <h1 className="greet">Welcome!.</h1>
-          {user ? (
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                history.push("/invoices");
-              }}
-            >
-              Create Invoice
-            </Button>
-          ) : (
-            <h3 className="signinmessage">Sign In to create Invoice.</h3>
-          )}
-          <p className="message">
-            Please use in Desktop/Laptop for better Experience.{" "}
+    <Container fixed disableGutters>
+      <div className="welcomepage">
+        <div className="mainImage">
+          <img src={image} style={{ height: "400px", width: "400px" }} />
+        </div>
+        <div className="info">
+          <h1 className="greet">Manage Your Invoices Easily.</h1>
+          <p className="moto" style={{ fontSize: "20px" }}>
+            <Link to={"/"} className={"link"} style={{ color: "blue" }}>
+              invoicer
+            </Link>{" "}
+            makes your life easier when it comes to billing and collecting
+            money.
           </p>
+          <div style={{ marginTop: "50px" }}>
+            <Button className="loginBtn" onClick={handleLogin}>
+              <p
+                style={{
+                  color: "white",
+                  fontSize: "25px",
+                  padding: "0px 20px",
+                }}
+              >
+                Log In
+              </p>
+            </Button>
+          </div>
         </div>
       </div>
-      <div className="welcomepage__right">
-        <div className="svgcontainer">
-          {user ? (
-            <img src={rest} alt="Resting" />
-          ) : (
-            <img src={image} alt="Image" />
-          )}
-        </div>
-        <h1 className="message">Manage Invoice Easily!!</h1>
-      </div>
-    </div>
+    </Container>
   );
 }
 

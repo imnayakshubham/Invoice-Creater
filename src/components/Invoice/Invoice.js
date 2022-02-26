@@ -9,14 +9,12 @@ function Invoice() {
   const { inputFields } = invoice;
   const { totalamount } = invoice;
 
-  console.log(inputFields);
   useEffect(() => {
     db.collection("invoices")
       .doc(id)
       .get()
       .then((snapshot) => setInvoice(snapshot.data()));
   }, []);
-  console.log(invoice);
 
   const printInvoice = () => {
     const ele = document.getElementsByClassName("header");
