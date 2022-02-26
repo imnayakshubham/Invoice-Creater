@@ -1,13 +1,11 @@
-import "./App.css";
+import { Router } from "react-router-dom";
 import HomeScreen from "./components/HomeScreen/HomeScreen";
 import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
-        <HomeScreen />
-      </AuthProvider>
+      <HomeScreen />
     </div>
   );
 }

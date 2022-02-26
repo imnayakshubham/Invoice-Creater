@@ -35,7 +35,7 @@ function Welcome() {
             makes your life easier when it comes to billing and collecting
             money.
           </p>
-          <div style={{ marginTop: "50px" }}>
+          <div style={{ marginTop: "50px" }} className={"mainLoginBtn"}>
             <Button className="loginBtn" onClick={handleLogin}>
               <p
                 style={{

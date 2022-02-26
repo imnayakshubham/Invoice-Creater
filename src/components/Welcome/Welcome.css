@@ -44,7 +44,15 @@
     margin-left: 0px;
   }
 
+  /* .mainImage {
+    width: 60%;
+  } */
+
   .moto {
+    padding: 15px;
+  }
+
+  .mainLoginBtn {
     padding: 15px;
   }
 }

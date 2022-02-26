@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setloading] = useState(true);
   const [user, setUser] = useState(null);
   const history = useHistory();
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
