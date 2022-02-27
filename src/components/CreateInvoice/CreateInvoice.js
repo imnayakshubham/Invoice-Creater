@@ -7,8 +7,12 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { db } from "../../firebaseconfig/firebase";
 import firebase from "firebase";
+import { AuthContext } from "./../../context/AuthContext";
+import { useContext } from "react";
 
 function CreateInvoice() {
+  const { user } = useContext(AuthContext);
+
   const [inputFields, setInputFields] = useState([
     { id: uuidv4(), productname: "", amount: 0, quantity: 0 },
   ]);
@@ -19,7 +23,7 @@ function CreateInvoice() {
   const [status, setstatus] = useState("unpaid");
   const [error, setError] = useState("");
   let totalamount = 0;
-  const userInfo = "lorem";
+  const userInfo = user.id;
 
   const handleAddFields = () => {
     setInputFields([

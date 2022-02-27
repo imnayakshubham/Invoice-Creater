@@ -13,7 +13,10 @@ function Invoice() {
     db.collection("invoices")
       .doc(id)
       .get()
-      .then((snapshot) => setInvoice(snapshot.data()));
+      .then(
+        (snapshot) =>
+          console.warn(snapshot.data()) || setInvoice(snapshot.data())
+      );
   }, []);
 
   const printInvoice = () => {
