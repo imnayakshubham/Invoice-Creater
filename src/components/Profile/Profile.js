@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Container, TextField, Button } from "@mui/material";
 import { AuthContext } from "./../../context/AuthContext";
 import { makeStyles } from "@mui/styles";
 import { db } from "../../firebaseconfig/firebase";
+import InputLabel from "@mui/material/InputLabel";
 
 const useStyles = makeStyles({
   field: {
@@ -20,20 +21,39 @@ export default function Profile({ history }) {
   const [since, setSince] = useState("");
   const [tc, setTc] = useState("");
 
+  const setLocalData = () => {
+    localStorage.setItem(
+      "profile",
+      JSON.stringify({ name, address, mob, since, tc })
+    );
+  };
+
+  const setStates = (profile) => {
+    setAddress(profile?.address);
+    setMob(profile?.mob);
+    setSince(profile?.since);
+    setTc(profile?.tc);
+    setName(profile?.name);
+  };
+
+  useEffect(() => {
+    let profile = localStorage.getItem("profile");
+    if (profile) {
+      setStates(JSON.parse(profile));
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
-    console.warn(user.uid);
     e.preventDefault();
-    const res = await db.collection(user.uid).add({
-      profile: {
-        name,
-        address,
-        mob,
-        since,
-        t_and_c: tc,
-        user: user.uid,
-      },
+    const res = await db.collection(`${user.uid}/info/profile`).add({
+      name,
+      address,
+      mob,
+      since,
+      t_and_c: tc,
+      user: user.uid,
     });
-    console.log(res, "res");
+    setLocalData();
   };
 
   return (
@@ -48,35 +68,47 @@ export default function Profile({ history }) {
           className={classes.field}
           id="filled-basic"
           label="Store Name"
-          variant="filled"
+          // variant="filled"
+          value={name}
+          // label="name"
+          color="secondary"
+          focused
         />
         <TextField
           onChange={(e) => setAddress(e.target.value)}
           className={classes.field}
           id="filled-basic"
+          value={address}
           label="Store Address"
-          variant="filled"
+          color="secondary"
+          focused
         />
         <TextField
           onChange={(e) => setMob(e.target.value)}
           className={classes.field}
           id="filled-basic"
-          label="Mobile No."
-          variant="filled"
+          value={mob}
+          label="Mobile"
+          color="secondary"
+          focused
         />
         <TextField
           onChange={(e) => setSince(e.target.value)}
           className={classes.field}
           id="filled-basic"
           label="Since."
-          variant="filled"
+          value={since}
+          color="secondary"
+          focused
         />
         <TextField
           onChange={(e) => setTc(e.target.value)}
           className={classes.field}
           id="filled-basic"
           label="Terms & Condition."
-          variant="filled"
+          value={tc}
+          color="secondary"
+          focused
         />
       </div>
       <p onClick={handleSubmit}>create</p>
