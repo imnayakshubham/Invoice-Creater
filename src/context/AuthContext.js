@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
       setloading(false);
       if (user) {
         localStorage.setItem("userInfo", JSON.stringify(user));
-        history.push("/invoices");
+        history.push("/profile");
       } else {
         history.push("/");
       }
