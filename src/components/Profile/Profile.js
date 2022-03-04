@@ -21,11 +21,18 @@ export default function Profile({ history }) {
   const [since, setSince] = useState("");
   const [tc, setTc] = useState("");
 
-  const setLocalData = () => {
-    localStorage.setItem(
-      "profile",
-      JSON.stringify({ name, address, mob, since, tc })
-    );
+  const setLocalData = (id) => {
+    if (id) {
+      localStorage.setItem(
+        "profile",
+        JSON.stringify({ name, address, mob, since, tc, id: id })
+      );
+    } else {
+      localStorage.setItem(
+        "profile",
+        JSON.stringify({ name, address, mob, since, tc })
+      );
+    }
   };
 
   const setStates = (profile) => {
@@ -45,15 +52,32 @@ export default function Profile({ history }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await db.collection(`${user.uid}/info/profile`).add({
-      name,
-      address,
-      mob,
-      since,
-      t_and_c: tc,
-      user: user.uid,
-    });
-    setLocalData();
+    const path = `profiles`;
+    let res;
+    let profile = localStorage.getItem("profile");
+    profile = JSON.parse(profile);
+
+    if (profile) {
+      res = await db.collection(path).doc(profile?.id).set({
+        name,
+        address,
+        mob,
+        since,
+        t_and_c: tc,
+        user: user.uid,
+      });
+      setLocalData();
+    } else {
+      res = await db.collection(path).add({
+        name,
+        address,
+        mob,
+        since,
+        t_and_c: tc,
+        user: user.uid,
+      });
+      setLocalData(res.id);
+    }
   };
 
   return (
