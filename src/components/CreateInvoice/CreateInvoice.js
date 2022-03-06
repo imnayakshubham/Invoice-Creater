@@ -50,6 +50,7 @@ function CreateInvoice() {
     );
     setInputFields(values);
   };
+
   const handleoptions = (e) => {
     if (e.target.value === "paid") {
       setstatus("paid");
@@ -96,6 +97,7 @@ function CreateInvoice() {
       setError(error);
     }
   };
+
   return (
     <div className="formcontainer">
       <form id="invoiceform">
