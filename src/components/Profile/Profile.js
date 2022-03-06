@@ -86,6 +86,7 @@ export default function Profile({ history }) {
         Upload Store Logo
         <input type="file" hidden />
       </Button> */}
+      <h2>User Profile ✨</h2>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <TextField
           onChange={(e) => setName(e.target.value)}
@@ -135,7 +136,7 @@ export default function Profile({ history }) {
           focused
         />
       </div>
-      <p onClick={handleSubmit}>create</p>
+      <Button onClick={handleSubmit}>Update Profile</Button>
     </Container>
   );
 }
