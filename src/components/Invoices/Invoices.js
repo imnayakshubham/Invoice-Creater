@@ -64,6 +64,8 @@ export default function Invoices() {
     getInvoices();
   }, []);
 
+  console.log("invoices", invoices);
+
   const columns = [
     { field: "id", headerName: "ID", width: "400px" },
     { field: "customerName", headerName: "Customer Name", width: "400px" },
@@ -120,7 +122,7 @@ export default function Invoices() {
     });
 
     console.log("res", res.docs);
-
+    getInvoices();
     setLoading(false);
     closeModal();
   };
@@ -227,7 +229,7 @@ export default function Invoices() {
         </Container>
       </Modal>
       <div style={{ height: 400, width: "1200px" }}>
-        <DataGrid
+        {/* <DataGrid
           rows={[
             { id: 1, customerName: "Snow", lastName: "Jon", createdOn: 35 },
             {
@@ -266,7 +268,7 @@ export default function Invoices() {
           pageSize={5}
           rowsPerPageOptions={[5]}
           checkboxSelection
-        />
+        /> */}
       </div>
     </Card>
   );
