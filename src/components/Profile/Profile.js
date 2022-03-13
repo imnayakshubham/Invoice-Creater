@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Container, TextField, Button } from "@mui/material";
+import { Container, TextField, Button, Select } from "@mui/material";
 import { AuthContext } from "./../../context/AuthContext";
 import { makeStyles } from "@mui/styles";
 import { db } from "../../firebaseconfig/firebase";
 import InputLabel from "@mui/material/InputLabel";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles({
   field: {
@@ -20,6 +21,8 @@ export default function Profile({ history }) {
   const [mob, setMob] = useState("");
   const [since, setSince] = useState("");
   const [tc, setTc] = useState("");
+  const [businessType, setBusinessType] = useState("");
+
 
   const setLocalData = (id) => {
     if (id) {
@@ -41,6 +44,7 @@ export default function Profile({ history }) {
     setSince(profile?.since);
     setTc(profile?.tc);
     setName(profile?.name);
+    setBusinessType(profile?.businessType)
   };
 
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function Profile({ history }) {
         mob,
         since,
         t_and_c: tc,
+        businessType: "",
         user: user.uid,
       });
       setLocalData();
@@ -74,6 +79,7 @@ export default function Profile({ history }) {
         mob,
         since,
         t_and_c: tc,
+        businessType: "",
         user: user.uid,
       });
       setLocalData(res.id);
@@ -87,6 +93,16 @@ export default function Profile({ history }) {
         <input type="file" hidden />
       </Button> */}
       <div style={{ display: "flex", flexDirection: "column" }}>
+        <Select
+          labelId="demo-simple-select-helper-label"
+          id="demo-simple-select-helper"
+          value={businessType}
+          placeholder="Select Business Type"
+          onChange={(value) => setBusinessType(value)}
+        >
+          <MenuItem value={"d2c"}>D2C</MenuItem>
+          <MenuItem value={"b2b"}>B2B</MenuItem>
+        </Select>
         <TextField
           onChange={(e) => setName(e.target.value)}
           className={classes.field}
@@ -135,7 +151,7 @@ export default function Profile({ history }) {
           focused
         />
       </div>
-      <p onClick={handleSubmit}>create</p>
+      <p onClick={handleSubmit}>Update Profile Details</p>
     </Container>
   );
 }

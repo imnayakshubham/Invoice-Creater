@@ -13,11 +13,8 @@ function Invoice() {
     db.collection("invoices")
       .doc(id)
       .get()
-      .then(
-        (snapshot) =>
-          console.warn(snapshot.data()) || setInvoice(snapshot.data())
-      );
-  }, []);
+      .then((snapshot) => setInvoice(snapshot.data()));
+  }, [id]);
 
   const printInvoice = () => {
     const ele = document.getElementsByClassName("header");

@@ -57,8 +57,10 @@ function Header() {
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
+              style={{display:"flex",flexDirection:"column"}}
             >
-              <Avatar alt="Remy Sharp" src="" />
+              <Avatar alt="Remy Sharp" src={user?.photoURL} />
+              <h5>{user?.displayName}</h5>
             </Button>
             <Menu
               id="fade-menu"

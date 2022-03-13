@@ -1,5 +1,5 @@
 import { Container, Typography } from "@material-ui/core";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { db } from "../../firebaseconfig/firebase";
 import { AuthContext } from "./../../context/AuthContext";
 import { Card } from "@mui/material";
@@ -7,10 +7,11 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, CircularProgress } from "@mui/material";
 import Modal from "react-modal";
 import { v4 as uuidv4 } from "uuid";
-import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "@mui/icons-material/Delete";
 import firebase from "firebase";
 import "./Invoices.css";
-import { AddIcon } from "@material-ui/icons/Add";
+import AddIcon from "@mui/icons-material/Add";
+import { Link } from "react-router-dom";
 const customStyles = {
   content: {
     top: "50%",
@@ -25,7 +26,6 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export default function Invoices() {
-  let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -45,12 +45,11 @@ export default function Invoices() {
 
   const { user } = useContext(AuthContext);
 
-  const getInvoices = async () => {
+  const getInvoices = useCallback(async () => {
     const docs = await db
       .collection("invoices")
       .where("user", "==", user.uid)
       .get();
-
     const dbInvoices = [];
 
     docs.forEach((doc) => {
@@ -58,20 +57,69 @@ export default function Invoices() {
     });
 
     setInvoices(dbInvoices);
-  };
+  }, [user.uid]);
 
   useEffect(() => {
     getInvoices();
-  }, []);
+  }, [getInvoices]);
 
   console.log("invoices", invoices);
 
   const columns = [
-    { field: "id", headerName: "ID", width: "400px" },
-    { field: "customerName", headerName: "Customer Name", width: "400px" },
-    { field: "createdOn", headerName: "Created On", width: "400px" },
-    { field: "createdOn", headerName: "Created On", width: "400px" },
-    { field: "lastName", headerName: "Last name", width: "400px" },
+    {
+      field: "clientName",
+      headerName: "Customer Name",
+
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: "timestamp",
+      headerName: "Created On",
+      flex: 1,
+      minWidth: 150,
+      renderCell: ({ row }) => {
+        console.log(row);
+        return <div>{row?.timestamp?.toDate().toDateString()}</div>;
+      },
+    },
+    {
+      field: "clientNum",
+      headerName: "Client Contact Number",
+      flex: 1,
+      minWidth: 150,
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
+      flex: 1,
+      minWidth: 150,
+      renderCell: ({ row }) => {
+        let totalamount = 0;
+        return (
+          <div>
+            {row?.products?.map((data, id) => {
+              totalamount = data.amount * data.quantity + totalamount;
+              return totalamount;
+            })}
+          </div>
+        );
+      },
+    },
+    {
+      field: "",
+      headerName: "Actions",
+      flex: 1,
+      sortable: "false",
+      minWidth: 150,
+      renderCell: ({ row }) => {
+        return (
+          <Button type="link">
+            View Invoice
+          </Button>
+        );
+      },
+    }
   ];
 
   const handleAddFields = () => {
@@ -113,6 +161,7 @@ export default function Invoices() {
     setLoading(true);
 
     const res = await db.collection("invoices").add({
+      id: uuidv4(),
       clientName,
       clientAddress,
       clientNum,
@@ -128,14 +177,18 @@ export default function Invoices() {
   };
 
   return (
-    <Card
+    <div
       style={{
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
       }}
     >
-      <Button onClick={openModal}>Create Invoice 📄 </Button>
+      <div
+        style={{ display: "flex", justifyContent: "end", margin: "0.75rem 9rem" }}
+      >
+        <Button onClick={openModal}>Create Invoice 📄 </Button>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onAfterOpen={afterOpenModal}
@@ -215,7 +268,10 @@ export default function Invoices() {
             ))}
           </div>
           <div style={{ marginTop: 10 }}>
-            <Button onClick={handleAddFields}> Add Product </Button>
+            <Button onClick={handleAddFields} startIcon={<AddIcon />}>
+              {" "}
+              Add Product{" "}
+            </Button>
           </div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button onClick={handleSubmit}>
@@ -228,48 +284,18 @@ export default function Invoices() {
           </div>
         </Container>
       </Modal>
-      <div style={{ height: 400, width: "1200px" }}>
-        {/* <DataGrid
-          rows={[
-            { id: 1, customerName: "Snow", lastName: "Jon", createdOn: 35 },
-            {
-              id: 2,
-              customerName: "Lannister",
-              lastName: "Cersei",
-              createdOn: 42,
-            },
-            {
-              id: 3,
-              customerName: "Lannister",
-              lastName: "Jaime",
-              createdOn: 45,
-            },
-            { id: 4, customerName: "Stark", lastName: "Arya", createdOn: 16 },
-            {
-              id: 5,
-              customerName: "Targaryen",
-              lastName: "Daenerys",
-              createdOn: null,
-            },
-            {
-              id: 6,
-              customerName: "Melisandre",
-              lastName: null,
-              createdOn: 150,
-            },
-            {
-              id: 7,
-              customerName: "Clifford",
-              lastName: "Ferrara",
-              createdOn: 44,
-            },
-          ]}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          checkboxSelection
-        /> */}
+      <div style={{ margin: "0 150px 0 150px" }}>
+        <div style={{ height: 400, justifyContent: "center" }}>
+          <DataGrid
+            rows={invoices}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            checkboxSelection
+            disableSelectionOnClick
+          />
+        </div>
       </div>
-    </Card>
+    </div>
   );
 }

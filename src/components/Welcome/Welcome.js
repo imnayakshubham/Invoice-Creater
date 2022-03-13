@@ -24,13 +24,13 @@ function Welcome() {
     <Container fixed disableGutters style={{ marginTop: "100px" }}>
       <div className="welcomepage">
         <div className="mainImage">
-          <img src={image} style={{ height: "400px", width: "400px" }} />
+          <img src={image} style={{ height: "400px", width: "400px" }} alt="Home page" />
         </div>
         <div className="info">
           <h1 className="greet">Manage Your Invoices Easily.</h1>
           <p className="moto" style={{ fontSize: "20px" }}>
             <Link to={"/"} className={"link"} style={{ color: "blue" }}>
-              invoicer
+              Invoicer
             </Link>{" "}
             makes your life easier when it comes to billing and collecting
             money.

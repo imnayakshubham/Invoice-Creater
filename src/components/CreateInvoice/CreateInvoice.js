@@ -60,6 +60,7 @@ function CreateInvoice() {
   };
   inputFields?.map((data, id) => {
     totalamount = data.amount * data.quantity + totalamount;
+    return totalamount;
   });
 
   const handleSubmit = async (e) => {
