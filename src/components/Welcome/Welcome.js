@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Welcome.css";
 import image from "../../assests/MessyDoodle.svg";
 import rest from "../../assests/GroovySittingDoodle.svg";
+import "./Welcome.css";
 
 import { AuthContext } from "../../context/AuthContext";
 import { useHistory } from "react-router";
@@ -24,7 +25,11 @@ function Welcome() {
     <Container fixed disableGutters style={{ marginTop: "100px" }}>
       <div className="welcomepage">
         <div className="mainImage">
-          <img src={image} style={{ height: "400px", width: "400px" }} alt="Home page" />
+          <img
+            src={user ? rest : image}
+            style={{ height: "400px", width: "400px" }}
+            alt="Home"
+          />
         </div>
         <div className="info">
           <h1 className="greet">Manage Your Invoices Easily.</h1>
@@ -37,9 +42,47 @@ function Welcome() {
           </p>
           <div style={{ marginTop: "50px" }} className={"mainLoginBtn"}>
             {user ? (
-              <Link to={"/create"}>
-                <p>Create A Invoice</p>
-              </Link>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  maxWidth: 250,
+                }}
+              >
+                <Button
+                  style={{ marginBottom: 10 }}
+                  className="actionBtn1"
+                  onClick={() => {
+                    history.push("invoices");
+                  }}
+                >
+                  <p
+                    style={{
+                      color: "white",
+                      fontSize: "15px",
+                      padding: "0px 20px",
+                    }}
+                  >
+                    View Invoices 📄
+                  </p>
+                </Button>
+                <Button
+                  className="actionBtn2"
+                  onClick={() => {
+                    history.push("profile");
+                  }}
+                >
+                  <p
+                    style={{
+                      color: "white",
+                      fontSize: "15px",
+                      padding: "0px 20px",
+                    }}
+                  >
+                    Update Profile ✨
+                  </p>
+                </Button>
+              </div>
             ) : (
               <Button className="loginBtn" onClick={handleLogin}>
                 <p

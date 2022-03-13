@@ -92,6 +92,7 @@ export default function Profile({ history }) {
         Upload Store Logo
         <input type="file" hidden />
       </Button> */}
+      <h2>User Profile ✨</h2>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Select
           labelId="demo-simple-select-helper-label"
@@ -151,7 +152,7 @@ export default function Profile({ history }) {
           focused
         />
       </div>
-      <p onClick={handleSubmit}>Update Profile Details</p>
+      <Button onClick={handleSubmit}>Update Profile</Button>
     </Container>
   );
 }
