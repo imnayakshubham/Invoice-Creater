@@ -7,10 +7,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, TextField, CircularProgress } from "@mui/material";
 import Modal from "react-modal";
 import { v4 as uuidv4 } from "uuid";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material";
 import firebase from "firebase";
 import "./Invoices.css";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
 const customStyles = {
   content: {
@@ -113,13 +113,9 @@ export default function Invoices() {
       sortable: "false",
       minWidth: 150,
       renderCell: ({ row }) => {
-        return (
-          <Button type="link">
-            View Invoice
-          </Button>
-        );
+        return <Button type="link">View Invoice</Button>;
       },
-    }
+    },
   ];
 
   const handleAddFields = () => {
@@ -185,7 +181,11 @@ export default function Invoices() {
       }}
     >
       <div
-        style={{ display: "flex", justifyContent: "end", margin: "0.75rem 9rem" }}
+        style={{
+          display: "flex",
+          justifyContent: "end",
+          margin: "0.75rem 9rem",
+        }}
       >
         <Button onClick={openModal}>Create Invoice 📄 </Button>
       </div>
@@ -262,13 +262,13 @@ export default function Invoices() {
                   disabled={inputFields.length === 1}
                   onClick={() => handleRemoveFields(inputField.id)}
                 >
-                  <DeleteIcon />
+                  {/* <DeleteIcon /> */}
                 </Button>
               </div>
             ))}
           </div>
           <div style={{ marginTop: 10 }}>
-            <Button onClick={handleAddFields} startIcon={<AddIcon />}>
+            <Button onClick={handleAddFields} r>
               {" "}
               Add Product{" "}
             </Button>
